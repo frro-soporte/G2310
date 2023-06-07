@@ -8,7 +8,17 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     elementos numéricos al final.
     """
     pass # Completar
-
+    numeros=[]
+    letras=[]
+    for i in lista:
+        pass
+        if type(i)==int:
+            pass
+            numeros.append(i)
+        else:
+            pass
+            letras.append(i)
+    return letras + numeros
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -21,7 +31,9 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
     pass # Completar
-
+    numeros=[x for x in lista if isinstance(x, int)]
+    letras=[x for x in lista if isinstance(x, str)]
+    return letras + numeros
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_comprension([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -36,7 +48,12 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
     pass # Completar
-
+    def custom_key(x):
+        if isinstance(x, int):
+            return 1
+        else:
+            return 2
+    return sorted(lista, key=custom_key, reverse=True)
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_sorted([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -51,7 +68,9 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
     pass # Completar
-
+    numeros = list(filter(lambda x: isinstance(x, int), lista))
+    letras = list(filter(lambda x: isinstance(x, str), lista))
+    return letras + numeros
 
 # NO MODIFICAR - INICIO
 if __name__ == "__main__":
