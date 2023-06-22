@@ -7,7 +7,10 @@ def sumatoria_basico(n: int) -> int:
     Restricción: Utilizar un bucle for.
     """
     pass # Completar
-
+    suma=0
+    for i in range(1,n+1):
+        suma = suma + i
+    return suma
 
 # NO MODIFICAR - INICIO
 assert sumatoria_basico(1) == 1
@@ -23,7 +26,9 @@ def sumatoria_sum(n: int) -> int:
     Referencia: https://docs.python.org/3/library/functions.html#sum
     """
     pass # Completar
-
+    numeros = range(1,n+1)
+    suma = sum(numeros)
+    return suma
 
 # NO MODIFICAR - INICIO
 assert sumatoria_sum(1) == 1
