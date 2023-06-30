@@ -45,12 +45,7 @@ def maximo_ternario(a: float, b: float) -> float:
     Referencia: https://docs.python.org/3/reference/expressions.html#conditional-expressions
     """
     pass # Completar
-    if (a>b):
-        pass
-        mayor=a
-    else:
-        pass
-        mayor=b
+    mayor=a if a >b else b
     return mayor
 
 # NO MODIFICAR - INICIO
