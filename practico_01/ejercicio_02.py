@@ -71,13 +71,17 @@ def maximo_recursivo(*args) -> float:
     """Re-Escribir de forma recursiva."""
     pass # Completar
     if len(args) == 1:
+        pass
         return args[0]
     else:
+        pass
         mayor=args[0]
         resto=maximo_recursivo(*args[1:])
         if resto > mayor:
+            pass
             return resto
         else:
+            pass
             return mayor
 
 # NO MODIFICAR - INICIO
