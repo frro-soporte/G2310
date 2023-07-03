@@ -11,7 +11,7 @@ def multiplicar_basico(numeros: Iterable[float]) -> float:
     """
     pass # Completar
     total=1
-    if len(numeros)==0:
+    if not numeros:
         pass
         return 0
     else:
@@ -41,12 +41,12 @@ def multiplicar_reduce(numeros: Iterable[float]) -> float:
     Referencia: https://docs.python.org/3.8/library/functools.html#functools.reduce
     """
     pass # Completar
-    if len(numeros)==0:
+    if not numeros :
         return 0
     else:
         pass
         total=reduce(lambda x, y: x * y, numeros)
-        return
+        return total
 
 # NO MODIFICAR - INICIO
 if __name__ == "__main__":
