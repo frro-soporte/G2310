@@ -12,12 +12,10 @@ class Auto:
     Referencia: https://docs.python.org/3/library/functions.html#property"""
 
     # Completar
-    _nombre: str
-    _precio: float
-
+    
     def __init__(self, nombre:str, precio:float) -> None:
-        self.nombre: str = nombre
-        self.precio: float = precio
+        self._nombre: str = nombre
+        self._precio: float = precio
 
     @property
     def nombre(self):
