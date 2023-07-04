@@ -16,16 +16,16 @@ class Auto:
     _precio: float
 
     def __init__(self, nombre:str, precio:float) -> None:
-        self.nombre: str = nombre
-        self.precio: float = precio
+        self._nombre: str = nombre
+        self._precio: float = precio
 
     @property
     def nombre(self):
         return self._nombre.capitalize()
 
-    @nombre.setter
-    def nombre(self, value: str) -> None:
-        self._nombre=value
+    #@nombre.setter
+    #def nombre(self, value: str) -> None:
+        #self._nombre=value
 
     @property
     def precio(self):
@@ -69,9 +69,9 @@ class Auto:
     def nombre(self) -> str:
         return self._nombre.capitalize()
 
-    @nombre.setter
-    def nombre(self, value: str) -> None:
-        self._nombre =value
+    #@nombre.setter
+    #def nombre(self, value: str) -> None:
+        #self._nombre = value
 
     @property
     def precio(self) -> float:
