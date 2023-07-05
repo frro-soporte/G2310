@@ -11,7 +11,10 @@ def agregar_persona(nombre, nacimiento, dni, altura):
     conn = sqlite3.connect('base_datos.db')
     c= conn.cursor()
 
-    c.execute('DROP TABLE IF EXISTS Persona')
+    c.execute('INSERT INTO Persona (Nombre,FechaNacimiento, DNI, Altura)  VALUES (?,?,?,?)',
+            (nombre, fecha_nacimiento, dni, altura))
+
+    id_persona = c.lastrowid   
     
     conn.commit()
     conn.close()
