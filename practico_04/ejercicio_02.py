@@ -8,7 +8,13 @@ def agregar_persona(nombre, nacimiento, dni, altura):
     """Implementar la funcion agregar_persona, que inserte un registro en la 
     tabla Persona y devuelva los datos ingresados el id del nuevo registro."""
     pass # Completar
+    conn = sqlite3.connect('base_datos.db')
+    c= conn.cursor()
 
+    c.execute('DROP TABLE IF EXISTS Persona')
+    
+    conn.commit()
+    conn.close()
 
 # NO MODIFICAR - INICIO
 @reset_tabla
