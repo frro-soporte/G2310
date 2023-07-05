@@ -21,10 +21,6 @@ class Auto:
     def nombre(self):
         return self._nombre.capitalize()
 
-    @nombre.setter
-    def nombre(self, value: str) -> None:
-        self._nombre=value
-
     @property
     def precio(self):
         return round(self._precio, 2)
@@ -66,10 +62,6 @@ class Auto:
     @property
     def nombre(self) -> str:
         return self._nombre.capitalize()
-
-    @nombre.setter
-    def nombre(self, value: str) -> None:
-        self._nombre =value
 
     @property
     def precio(self) -> float:
