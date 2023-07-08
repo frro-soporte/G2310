@@ -31,9 +31,8 @@ def borrar_tabla():
     pass # Completar
     conn = sqlite3.connect('base_datos.db')
     c= conn.cursor()
-
     c.execute('DROP TABLE IF EXISTS Persona')
-    
+
     conn.commit()
     conn.close()
 
