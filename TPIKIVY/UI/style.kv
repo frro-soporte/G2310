@@ -1,0 +1,89 @@
+<UI>
+	Screen:
+        name: "Principal"
+        BoxLayout:
+            orientation: 'vertical'
+            RelativeLayout:
+                Label:
+                    text: "BIENVENIDOS"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            GridLayout
+                rows: 2
+                cols: 2
+                padding: 10
+                spacing: 10
+
+                Button:
+                    text: "Agregar"
+                    on_press:
+                        root.transition.direction = "right"
+                        root.current = "Agregar" 
+                Button:
+                    text: "Actualizar"
+                Button:
+                    text: "Eliminar"
+                Button:
+                    text: "Listar"
+            RelativeLayout:
+                Button:
+                    text: "Salir"
+                    on_press:
+                        root.transition.direction = 'right'
+                        root.current = "Agregar"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
+              
+	Screen:
+		name: "Agregar"
+		BoxLayout:
+			orientation: "vertical"
+			Label:
+				text: "Hola Sabrina"
+            GridLayout
+                rows: 2
+                cols: 2
+                padding: 10
+                spacing: 10
+
+                Button:
+                    text: "Agregar"
+                    on_press:
+                        root.transition.direction = "right"
+                        root.current = "Agregar" 
+                Button:
+                    text: "Actualizar"
+                Button:
+                    text: "Eliminar"
+                Button:
+                    text: "Listar"
+            RelativeLayout:
+                Button:
+                    text: "Salir"
+                    on_press:
+                        root.transition.direction = 'right'
+                        root.current = "Principal"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
+
+	Screen:
+		name: "Pantalla 3"
+		BoxLayout:
+			orientation: "vertical"
+			canvas:
+				Color:
+					rgb: [0,0,0]
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			Label:
+				text: "Pantalla 3"
+			Button:
+				text: "Volver Pantalla 1"
+				on_press:
+					root.transition.direction = 'down'
+					root.current = "Pantalla 1"
+				size_hint: (0.3,0.1)
+				pos_hint: {'center_x':0.5, 'center_y':0.5}
