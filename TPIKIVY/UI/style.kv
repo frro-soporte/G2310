@@ -30,43 +30,66 @@
             RelativeLayout:
                 Button:
                     text: "Salir"
-                    on_press:
-                        root.transition.direction = 'right'
-                        root.current = "Agregar"
+                    on_release: app.stop()
                     size_hint: (0.3, 0.2)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
               
 	Screen:
 		name: "Agregar"
 		BoxLayout:
 			orientation: "vertical"
-			Label:
-				text: "Hola Sabrina"
-            GridLayout
-                rows: 2
+			RelativeLayout:
+                Label:
+                    text: "Agregar empleado"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            GridLayout:
+                rows: 4
                 cols: 2
-                padding: 10
-                spacing: 10
 
-                Button:
-                    text: "Agregar"
-                    on_press:
-                        root.transition.direction = "right"
-                        root.current = "Agregar" 
-                Button:
-                    text: "Actualizar"
-                Button:
-                    text: "Eliminar"
-                Button:
-                    text: "Listar"
+                Label:
+                    text: "Nombre:"
+                TextInput:
+                    id: nombre
+                    focus: True
+                    multiline: False
+
+                Label:
+                    text: "Apellido:"
+                TextInput:
+                    id: apellido
+                    focus: True
+                    multiline: False
+
+                Label:
+                    text: "DNI:"
+                TextInput:
+                    id: dni
+                    focus: True
+                    multiline: False
+                    input_filter: "float"
+
+                Label:
+                    text: "Mail:"
+                TextInput:
+                    id: mail
+                    focus: True
+                    multiline: False
+
             RelativeLayout:
                 Button:
-                    text: "Salir"
+                    text: "Agregar"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
+                Button:
+                    text: "Volver"
                     on_press:
                         root.transition.direction = 'right'
                         root.current = "Principal"
                     size_hint: (0.3, 0.2)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
 
 	Screen:
 		name: "Pantalla 3"
