@@ -88,8 +88,8 @@
                     text: "Agregar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
-                    on_release:
-                        app.root.current: "Agregar"
+                    on_press:
+                        app.root.AgregarEmpleado()
                         app.root.reset_text()
 
                 Button:
