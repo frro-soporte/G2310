@@ -7,11 +7,18 @@ from kivy.lang import Builder
 
 class UI(ScreenManager):
     pass
-
+    def reset_text(self):
+        self.ids.nombre.text = ""
+        self.ids.apellido.text = ""
+        self.ids.dni.text = ""
+        self.ids.mail.text = ""
 class MyApp(App):
     def build(self):
         Window.size = (350, 500)
         Builder.load_file("style.kv")
         return UI()
-    
+
+    def AgregarEmpleado(self):
+        nombrex = self.ids.nombre.text
+
 MyApp().run()

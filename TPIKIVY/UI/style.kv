@@ -55,6 +55,8 @@
                     id: nombre
                     focus: True
                     multiline: False
+                    hint_text: "Ingresar nombre"
+                    
 
                 Label:
                     text: "Apellido:"
@@ -62,6 +64,7 @@
                     id: apellido
                     focus: True
                     multiline: False
+                    hint_text: "Ingresar apellido"
 
                 Label:
                     text: "DNI:"
@@ -70,6 +73,7 @@
                     focus: True
                     multiline: False
                     input_filter: "float"
+                    hint_text: "Ingresar DNI"
 
                 Label:
                     text: "Mail:"
@@ -77,12 +81,17 @@
                     id: mail
                     focus: True
                     multiline: False
+                    hint_text: "Ingresar mail"
 
             RelativeLayout:
                 Button:
                     text: "Agregar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
+                    on_release:
+                        app.root.current: "Agregar"
+                        app.root.reset_text()
+
                 Button:
                     text: "Volver"
                     on_press:
