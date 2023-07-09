@@ -3,6 +3,7 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button
 from kivy.lang import Builder
+from CONTROLADOR import controlador
 
 
 class UI(ScreenManager):
@@ -18,11 +19,12 @@ class UI(ScreenManager):
         apellidox = self.ids.apellido.text
         dnix = self.ids.dni.text
         mailx = self.ids.mail.text
+        controlador.insert( nombrex, apellidox, dnix, mailx)
 
 class MyApp(App):
     def build(self):
         Window.size = (350, 500)
-        Builder.load_file("style.kv")
+        Builder.load_file("D:/Soporte/practicos/G2310/TPIKIVY/UI/style.kv")
         return UI()
 
     """def AgregarEmpleado(self):
@@ -35,7 +37,3 @@ class MyApp(App):
         else:
             estado = True
         return estado"""
-
-
-
-MyApp().run()
