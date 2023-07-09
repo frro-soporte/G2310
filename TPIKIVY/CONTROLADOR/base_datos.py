@@ -1,9 +1,9 @@
 import sqlite3
 
-def conectar_db(c):
-    conn = sqlite3.connect('base_datos.db')
-    c= conn.cursor()
+def conectar_db():
+    conn = sqlite3.connect('base_datos_kivy.db')
+    return conn
 
-def cerrar_conexion(conn):
+def comit_cerrar_conexion(conn):
     conn.commit()
     conn.close()
