@@ -50,7 +50,7 @@
                 cols: 2
 
                 Label:
-                    text: "Nombre:"
+                    text: "Nombre"
                 TextInput:
                     id: nombre
                     focus: True
@@ -60,7 +60,7 @@
                     
 
                 Label:
-                    text: "Apellido:"
+                    text: "Apellido"
                 TextInput:
                     id: apellido
                     focus: True
@@ -69,7 +69,7 @@
                     input_filter: lambda text, from_undo: '' if not text.isalpha() else text
 
                 Label:
-                    text: "DNI:"
+                    text: "DNI"
                 TextInput:
                     id: dni
                     focus: True
@@ -78,13 +78,13 @@
                     hint_text: "Ingresar DNI"
 
                 Label:
-                    text: "Mail:"
+                    text: "Mail"
                 TextInput:
                     id: mail
                     focus: True
                     multiline: False
                     hint_text: "Ingresar mail"
-                    input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+                    #input_filter: lambda text, from_undo: '' if not text.isalpha() else text
 
             RelativeLayout:
                 Button:

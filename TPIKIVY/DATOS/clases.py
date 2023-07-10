@@ -25,9 +25,10 @@ def create_table():
     c = conn.cursor()
 
     c.execute('''CREATE TABLE Empleado (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                     nombre CHAR(30),
                     apellido CHAR(30),
-                    dni INTEGER PRIMARY KEY,
+                    dni INTEGER,
                     mail CHAR(30)
                 )''')
     bd.comit_cerrar_conexion(conn)
