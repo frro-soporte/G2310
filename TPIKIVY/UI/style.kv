@@ -25,6 +25,9 @@
                     text: "Actualizar"
                 Button:
                     text: "Eliminar"
+                    on_press:
+                        root.transition.direction = "right"
+                        root.current = "Eliminar"
                 Button:
                     text: "Listar"
             RelativeLayout:
@@ -95,6 +98,58 @@
                     on_press:
                         app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop()
                         app.root.reset_text()
+
+                Button:
+                    text: "Volver"
+                    on_press:
+                        root.transition.direction = 'right'
+                        root.current = "Principal"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+
+    Screen:
+		name: "Eliminar"
+		BoxLayout:
+			orientation: "vertical"
+			RelativeLayout:
+                Label:
+                    text: "Eliminar empleado"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            GridLayout:
+                rows: 4
+                cols: 2
+
+                TextInput:
+                    id: dni_b
+                Button:
+                    text: "Buscar"
+                    on_release: app.root.BuscarEmpleado()
+                    
+                Label:
+                    text: "Datos del empleado"
+                GridLayout:
+                    Label:
+                        id: "DNI:"
+                    Label:
+                        id: dni_buscado
+                    
+                Button:
+                    text: "Eliminar"
+                    on_release: app.root.EliminarEmpleado()
+                    
+
+            RelativeLayout:
+                Button:
+                    text: "Eliminar"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
+                    on_press:
+                        #app.root.AgregarEmpleado() if app.root.error_vacios() == True else app.root.open_pop()
+                        #app.root.reset_text()
+                        root.current = "Principal"
 
                 Button:
                     text: "Volver"
