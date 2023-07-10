@@ -27,7 +27,11 @@
                     text: "Eliminar"
                     on_press:
                         root.transition.direction = "right"
+<<<<<<< HEAD
                         root.current = "Eliminar"
+=======
+                        root.current = "Eliminar" 
+>>>>>>> daf68524882a2ed8aafbe69b2328462a8733a76a
                 Button:
                     text: "Listar"
             RelativeLayout:
@@ -98,7 +102,6 @@
                     on_press:
                         app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop()
                         app.root.reset_text()
-
                 Button:
                     text: "Volver"
                     on_press:
@@ -108,16 +111,24 @@
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
 
     Screen:
+<<<<<<< HEAD
 		name: "Eliminar"
 		BoxLayout:
 			orientation: "vertical"
 			RelativeLayout:
+=======
+        name: "Eliminar"
+        BoxLayout:
+            orientation: 'vertical'
+            RelativeLayout:
+>>>>>>> daf68524882a2ed8aafbe69b2328462a8733a76a
                 Label:
                     text: "Eliminar empleado"
                     font_size: '24sp'
                     size_hint: None, None
                     size: self.texture_size
                     pos_hint: {'center_x': 0.5, 'top': 0.8}
+<<<<<<< HEAD
             GridLayout:
                 rows: 4
                 cols: 2
@@ -141,16 +152,43 @@
                     on_release: app.root.EliminarEmpleado()
                     
 
+=======
+            GridLayout
+                rows: 1
+                cols: 2
+                padding: 10
+                spacing: 10
+                size_hint: (0.95, 0.20)
+                pos_hint: {'center_x': 0.5}
+                TextInput:
+                    id: nombre
+                    focus: True
+                    multiline: False
+                    hint_text: "Ingresar dni"
+                    hint_text_align: "center"
+                    valing: "middle"
+                    halign: "center"
+                    input_filter: "float"
+                Button:
+                    text: "Buscar"
+    
+>>>>>>> daf68524882a2ed8aafbe69b2328462a8733a76a
             RelativeLayout:
                 Button:
                     text: "Eliminar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
+<<<<<<< HEAD
                     on_press:
                         #app.root.AgregarEmpleado() if app.root.error_vacios() == True else app.root.open_pop()
                         #app.root.reset_text()
                         root.current = "Principal"
 
+=======
+                    #on_press:
+                        #app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop()
+                        #app.root.reset_text()
+>>>>>>> daf68524882a2ed8aafbe69b2328462a8733a76a
                 Button:
                     text: "Volver"
                     on_press:
@@ -158,7 +196,10 @@
                         root.current = "Principal"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> daf68524882a2ed8aafbe69b2328462a8733a76a
 <MyPopup>
     id: pop1
     size_hint:.7,.7
