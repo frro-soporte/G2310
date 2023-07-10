@@ -40,6 +40,23 @@ def insert(self, nombre:str, apellido:str, dni:int, mail:str):
     c.execute('''INSERT INTO Empleado (nombre, apellido, dni, mail) VALUES (?, ?, ?, ?)''', (nombre, apellido, dni, mail))
     bd.comit_cerrar_conexion(conn)
 
+def search(self, dni:int):
+    conn = bd.conectar_db()
+    c =  conn.cursor()
+    c.execute('SELECT * FROM Empleado WHERE dni = ?', (dni,))
+    empleado = c.fetchone()
+    
+    bd.comit_cerrar_conexion(conn)
+    return empleado
+    
+        
+
+def delete(self,dni):
+    conn = bd.conectar_db()
+    c =  conn.cursor()
+    c.execute('DELETE FROM Empleado WHERE dni = ?', (dni))
+    bd.comit_cerrar_conexion(conn)
+
 
 
         
