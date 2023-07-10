@@ -56,6 +56,7 @@
                     focus: True
                     multiline: False
                     hint_text: "Ingresar nombre"
+                    input_filter: lambda text, from_undo: '' if not text.isalpha() else text
                     
 
                 Label:
@@ -65,6 +66,7 @@
                     focus: True
                     multiline: False
                     hint_text: "Ingresar apellido"
+                    input_filter: lambda text, from_undo: '' if not text.isalpha() else text
 
                 Label:
                     text: "DNI:"
@@ -82,6 +84,7 @@
                     focus: True
                     multiline: False
                     hint_text: "Ingresar mail"
+                    input_filter: lambda text, from_undo: '' if not text.isalpha() else text
 
             RelativeLayout:
                 Button:
@@ -89,7 +92,7 @@
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
                     on_press:
-                        app.root.AgregarEmpleado()
+                        app.root.AgregarEmpleado() if app.root.error_vacios() == True else app.root.open_pop()
                         app.root.reset_text()
 
                 Button:
@@ -100,22 +103,13 @@
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
 
-	Screen:
-		name: "Pantalla 3"
-		BoxLayout:
-			orientation: "vertical"
-			canvas:
-				Color:
-					rgb: [0,0,0]
-				Rectangle:
-					pos: self.pos
-					size: self.size
-			Label:
-				text: "Pantalla 3"
-			Button:
-				text: "Volver Pantalla 1"
-				on_press:
-					root.transition.direction = 'down'
-					root.current = "Pantalla 1"
-				size_hint: (0.3,0.1)
-				pos_hint: {'center_x':0.5, 'center_y':0.5}
+<MyPopup>
+    id: pop1
+    size_hint:.7,.7
+    auto_dismiss: False
+    title: "Error"
+
+    Button:
+        text: "Campos vacios \n Volver a ingresar nuevamente"
+        halign: "center"
+        on_press: pop1.dismiss()
