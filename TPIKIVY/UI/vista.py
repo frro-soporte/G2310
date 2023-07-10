@@ -28,17 +28,25 @@ class UI(ScreenManager):
         self.ids.dni.text = ""
         self.ids.mail.text = ""
 
+    def validardni(self):
+        dnix = self.ids.dni.text
+        result = controlador.validar_dni(self, dnix)
+        if result == True:
+            pass
+            return True
+        else:
+            return False
     def AgregarEmpleado(self):
         nombrex = self.ids.nombre.text
         apellidox = self.ids.apellido.text
         dnix = self.ids.dni.text
         mailx = self.ids.mail.text
-        #controlador.insert( nombrex, apellidox, dnix, mailx)
+        controlador.insert(self, nombrex, apellidox, dnix, mailx)
 
 class MyApp(App):
     def build(self):
         Window.size = (350, 500)
-        Builder.load_file("D:/Soporte/practicos/G2310/TPIKIVY/UI/style.kv")
+        Builder.load_file("D:/Soporte/practicos/G2310/TPIKIVY/UI/style.kv") #VER UBICACION DEL STYLE
         return UI()
 
     """def AgregarEmpleado(self):
