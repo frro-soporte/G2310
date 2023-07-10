@@ -46,5 +46,5 @@ class UI(ScreenManager):
 class MyApp(App):
     def build(self):
         Window.size = (350, 500)
-        Builder.load_file("../G2310/TPIKIVY/UI/style.kv") #VER UBICACION DEL STYLE
+        Builder.load_file("../G2310/TPIKIVY/UI/style.kv")
         return UI()
