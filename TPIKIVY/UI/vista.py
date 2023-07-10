@@ -43,6 +43,16 @@ class UI(ScreenManager):
         mailx = self.ids.mail.text
         controlador.insert(self, nombrex, apellidox, dnix, mailx)
 
+    def BuscarEmpleado(self):
+        dni = self.ids.dni_b.text
+        empleado = controlador.search(self, dni)
+        if empleado is not None:
+            self.ids.dni_buscado.text = str(empleado[3])
+
+    #def EliminarEmpleado(self):
+     #   dni_e= self.BuscarEmpleado()
+     #   controlador.delete(self, dni_e)
+
 class MyApp(App):
     def build(self):
         Window.size = (350, 500)
