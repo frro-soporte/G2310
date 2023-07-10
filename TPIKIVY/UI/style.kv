@@ -91,8 +91,9 @@
                     text: "Agregar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
+                    disabled: True if nombre.text == "" or apellido.text == "" or dni.text == "" or mail.text == "" else False
                     on_press:
-                        app.root.AgregarEmpleado() if app.root.error_vacios() == True else app.root.open_pop()
+                        app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop()
                         app.root.reset_text()
 
                 Button:
@@ -110,6 +111,6 @@
     title: "Error"
 
     Button:
-        text: "Campos vacios \n Volver a ingresar nuevamente"
+        text: "El dni ya existe \n Ingresar otro nuevamente"
         halign: "center"
         on_press: pop1.dismiss()
