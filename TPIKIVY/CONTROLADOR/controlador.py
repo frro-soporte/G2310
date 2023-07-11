@@ -3,7 +3,8 @@ from DATOS import clases as cl
 from DATOS import base_datos as bd
 
 def validar_dni(self, dni):
-    return cl.validar_dni(self,dni)
+    result = cl.validar_dni(self, dni)
+    return result
 
 def validar_tabla():
     bd.validar_tabla()

@@ -1,19 +1,24 @@
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from CONTROLADOR import controlador
 
-class MyPopup (Popup):
+class MyPopup1(Popup):
+    pass
+class MyPopup2(Popup):
     pass
 
 
 class UI(ScreenManager):
     pass
-    def open_pop(self):
-        pops = MyPopup()
+    def open_pop1(self):
+        pops = MyPopup1()
+        pops.open()
+
+    def open_pop2(self):
+        pops = MyPopup2()
         pops.open()
 
     def error_vacios(self):
@@ -22,20 +27,17 @@ class UI(ScreenManager):
         else:
             return True
     
-    def reset_text(self):
-        self.ids.nombre.text = ""
-        self.ids.apellido.text = ""
-        self.ids.dni.text = ""
-        self.ids.mail.text = ""
+    def reset_text(self, nombre_buscado, apellido_buscado, dni_buscado, mail_buscado):
+        self.ids.nombre_buscado.text = ""
+        self.ids.apellido_buscado.text = ""
+        self.ids.dni_buscado.text = ""
+        self.ids.mail_buscado.text = ""
 
     def validardni(self):
         dnix = self.ids.dni.text
         result = controlador.validar_dni(self, dnix)
-        if result == True:
-            pass
-            return True
-        else:
-            return False
+        return result
+    
     def AgregarEmpleado(self):
         nombrex = self.ids.nombre.text
         apellidox = self.ids.apellido.text
@@ -44,14 +46,24 @@ class UI(ScreenManager):
         controlador.insert(self, nombrex, apellidox, dnix, mailx)
 
     def BuscarEmpleado(self):
-        dni = self.ids.dni_b.text
+        dni = self.ids.buscardni.text
         empleado = controlador.search(self, dni)
         if empleado is not None:
+            self.ids.nombre_buscado.text = empleado[1]
+            self.ids.apellido_buscado.text = empleado[2]
             self.ids.dni_buscado.text = str(empleado[3])
+            self.ids.mail_buscado.text = empleado[4]
+            self.ids.nombre_sinbuscar.text = "Nombre:"
+            self.ids.apellido_sinbuscar.text = "Apellido:"
+            self.ids.dni_sinbuscar.text = "DNI:"
+            self.ids.mail_sinbuscar.text = "Mail:"
+            return True
+        else:
+            return False
 
-    #def EliminarEmpleado(self):
-     #   dni_e= self.BuscarEmpleado()
-     #   controlador.delete(self, dni_e)
+    def EliminarEmpleado(self):
+        dni_eli= self.ids.buscardni.text
+        controlador.delete(self, dni_eli)
 
 class MyApp(App):
     def build(self):

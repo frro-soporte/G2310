@@ -11,7 +11,7 @@ class Empleado:
 def validar_dni(self, dni):
     conn = bd.conectar_db()
     c = conn.cursor()
-    c.execute("SELECT dni FROM Empleado WHERE dni = ?", dni)
+    c.execute("SELECT dni FROM Empleado WHERE dni = ?", (dni,))
     result = c.fetchone()
     if result is None:
         bd.comit_cerrar_conexion(conn)
@@ -54,7 +54,7 @@ def search(self, dni:int):
 def delete(self,dni):
     conn = bd.conectar_db()
     c =  conn.cursor()
-    c.execute('DELETE FROM Empleado WHERE dni = ?', (dni))
+    c.execute('DELETE FROM Empleado WHERE dni = ?', (dni,))
     bd.comit_cerrar_conexion(conn)
 
 

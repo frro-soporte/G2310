@@ -96,8 +96,8 @@
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
                     disabled: True if nombre.text == "" or apellido.text == "" or dni.text == "" or mail.text == "" else False
                     on_press:
-                        app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop()
-                        app.root.reset_text()
+                        app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
+                        app.root.reset_text(nombre,apellido,dni,mail)
                 Button:
                     text: "Volver"
                     on_press:
@@ -117,15 +117,15 @@
                     size_hint: None, None
                     size: self.texture_size
                     pos_hint: {'center_x': 0.5, 'top': 0.8}
-            GridLayout
+            GridLayout:
                 rows: 1
                 cols: 2
                 padding: 10
                 spacing: 10
-                size_hint: (0.95, 0.20)
-                pos_hint: {'center_x': 0.5}
+                size_hint: (0.95, 0.35)
+                pos_hint: {"center_x": 0.5, "top": 0.9}
                 TextInput:
-                    id: nombre
+                    id: buscardni
                     focus: True
                     multiline: False
                     hint_text: "Ingresar dni"
@@ -135,23 +135,71 @@
                     input_filter: "float"
                 Button:
                     text: "Buscar"
-    
+                    on_press: 
+                        result = app.root.BuscarEmpleado()
+                        app.root.open_pop2() if result == False else None
+
+            GridLayout:
+                rows: 5
+                cols: 2
+                padding: -15
+                spacing: 5
+                size_hint: (0.80, 0.95)
+                pos_hint: {"center_x": 0.51, "top": 0.9}
+                Label:
+                    text: ""
+                Label:
+                    text: ""
+                
+                Label:
+                    id: nombre_sinbuscar
+                    text: ""
+                TextInput:
+                    id: nombre_buscado
+                    focus: True
+                    multiline: False
+                
+                Label:
+                    id: apellido_sinbuscar
+                    text: ""
+                TextInput:
+                    id: apellido_buscado
+                    focus: True
+                    multiline: False
+
+                Label:
+                    id: dni_sinbuscar
+                    text: ""
+                TextInput:
+                    id: dni_buscado
+                    focus: True
+                    multiline: False
+
+                Label:
+                    id: mail_sinbuscar
+                    text: ""
+                TextInput:
+                    id: mail_buscado
+                    focus: True
+                    multiline: False
+
             RelativeLayout:
                 Button:
                     text: "Eliminar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
-                    #on_press:
-                        #app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop()
-                        #app.root.reset_text()
+                    disabled: True if (buscardni.text == "") or (dni_buscado.text == "") else False
+                    on_press:
+                        app.root.EliminarEmpleado() if (app.root.BuscarEmpleado() == True) else app.root.open_pop2()
+                        app.root.reset_text(nombre_buscado,apellido_buscado,dni_buscado,mail_buscado)
                 Button:
                     text: "Volver"
                     on_press:
-                        root.transition.direction = 'right'
-                        root.current = "Principal"
+                        app.root.transition.direction = 'right'
+                        app.root.current = "Principal"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
-<MyPopup>
+<MyPopup1>
     id: pop1
     size_hint:.7,.7
     auto_dismiss: False
@@ -161,3 +209,14 @@
         text: "El dni ya existe \n Ingresar otro nuevamente"
         halign: "center"
         on_press: pop1.dismiss()
+
+<MyPopup2>
+    id: pop2
+    size_hint:.7,.7
+    auto_dismiss: False
+    title: "Error"
+
+    Button:
+        text: "dni incorrecto \n Ingrese otro nuevamente"
+        halign: "center"
+        on_press: pop2.dismiss()
