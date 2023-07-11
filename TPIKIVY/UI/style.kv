@@ -96,7 +96,7 @@
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
                     disabled: True if nombre.text == "" or apellido.text == "" or dni.text == "" or mail.text == "" else False
                     on_press:
-                        app.root.AgregarEmpleado() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
+                        app.root.Confirmar() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
                         app.root.reset_text(nombre,apellido,dni,mail)
                 Button:
                     text: "Volver"
@@ -204,7 +204,6 @@
     size_hint:.7,.7
     auto_dismiss: False
     title: "Error"
-
     Button:
         text: "El dni ya existe \n Ingresar otro nuevamente"
         halign: "center"
@@ -220,3 +219,27 @@
         text: "dni incorrecto \n Ingrese otro nuevamente"
         halign: "center"
         on_press: pop2.dismiss()
+
+<Confirmar>
+    id: pop3
+    size_hint:.7,.7
+    auto_dismiss: False
+    title: "Confirmar"
+    GridLayout:
+        rows: 2
+        cols: 1
+        padding: 10
+        spacing: 10
+        size_hint: (0.50, 0.50)
+        pos_hint: {"center_x": 0.50, "center_y": 0.50}
+        Button:
+            text: "Desea confirmar?"
+            halign: "center"
+            on_press: 
+                app.root.AgregarEmpleado()
+                pop3.dismiss()
+        Button:
+            text: "Cancelar"
+            halign: "center"
+            on_press:
+                pop3.dismiss()

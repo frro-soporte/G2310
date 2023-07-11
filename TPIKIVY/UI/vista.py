@@ -4,12 +4,14 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from CONTROLADOR import controlador
+from UI import limpiar as li
 
 class MyPopup1(Popup):
     pass
 class MyPopup2(Popup):
     pass
-
+class Confirmar(Popup):
+    pass
 
 class UI(ScreenManager):
     pass
@@ -21,17 +23,15 @@ class UI(ScreenManager):
         pops = MyPopup2()
         pops.open()
 
+    def Confirmar(self):
+        pops = Confirmar()
+        pops.open()
+
     def error_vacios(self):
-        if (self.ids.nombre.text and self.ids.apellido.text and self.ids.dni.text and self.ids.mail.text) == "":
-            return False
-        else:
-            return True
+        return li.error_vacios(self)
     
     def reset_text(self, nombre_buscado, apellido_buscado, dni_buscado, mail_buscado):
-        self.ids.nombre_buscado.text = ""
-        self.ids.apellido_buscado.text = ""
-        self.ids.dni_buscado.text = ""
-        self.ids.mail_buscado.text = ""
+        return li.reset_text(self, nombre_buscado, apellido_buscado, dni_buscado, mail_buscado)
 
     def validardni(self):
         dnix = self.ids.dni.text
