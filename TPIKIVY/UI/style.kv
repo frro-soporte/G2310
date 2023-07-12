@@ -18,20 +18,28 @@
 
                 Button:
                     text: "Agregar"
+                    background_color: (0.5, 0.5, 0.5, 1)
                     on_press:
                         root.transition.direction = "right"
                         root.current = "Agregar" 
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Actualizar"
+                    on_press:
+                        root.transition.direction = "right"
+                        root.current = "Actualizar" 
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Eliminar"
                     on_press:
                         root.transition.direction = "right"
                         root.current = "Eliminar" 
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Listar"
             RelativeLayout:
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Salir"
                     on_release: app.stop()
                     size_hint: (0.3, 0.2)
@@ -55,7 +63,7 @@
                 Label:
                     text: "Nombre"
                 TextInput:
-                    id: nombre
+                    id: nombre_agregar
                     focus: True
                     multiline: False
                     hint_text: "Ingresar nombre"
@@ -65,7 +73,7 @@
                 Label:
                     text: "Apellido"
                 TextInput:
-                    id: apellido
+                    id: apellido_agregar
                     focus: True
                     multiline: False
                     hint_text: "Ingresar apellido"
@@ -74,7 +82,7 @@
                 Label:
                     text: "DNI"
                 TextInput:
-                    id: dni
+                    id: dni_agregar
                     focus: True
                     multiline: False
                     input_filter: "float"
@@ -83,7 +91,7 @@
                 Label:
                     text: "Mail"
                 TextInput:
-                    id: mail
+                    id: mail_agregar
                     focus: True
                     multiline: False
                     hint_text: "Ingresar mail"
@@ -91,16 +99,20 @@
 
             RelativeLayout:
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Agregar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
-                    disabled: True if nombre.text == "" or apellido.text == "" or dni.text == "" or mail.text == "" else False
+                    disabled: True if (nombre_agregar.text == "") or (apellido_agregar.text == "") or (dni_agregar.text == "") or (mail_agregar.text == "") else False
                     on_press:
-                        app.root.Confirmar() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
-                        app.root.reset_text(nombre,apellido,dni,mail)
+                        state = False
+                        app.root.open_confirmar() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
+                        app.root.reset_text_agregar(nombre_agregar,apellido_agregar,dni_agregar,mail_agregar) if (app.root.AgregarEmpleado(state) == False) else None
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
                     on_press:
+                        app.root.reset_text_agregar(nombre_agregar,apellido_agregar,dni_agregar,mail_agregar)
                         root.transition.direction = 'right'
                         root.current = "Principal"
                     size_hint: (0.3, 0.2)
@@ -134,6 +146,7 @@
                     halign: "center"
                     input_filter: "float"
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Buscar"
                     on_press: 
                         result = app.root.BuscarEmpleado()
@@ -154,7 +167,7 @@
                 Label:
                     id: nombre_sinbuscar
                     text: ""
-                TextInput:
+                Label:
                     id: nombre_buscado
                     focus: True
                     multiline: False
@@ -162,7 +175,7 @@
                 Label:
                     id: apellido_sinbuscar
                     text: ""
-                TextInput:
+                Label:
                     id: apellido_buscado
                     focus: True
                     multiline: False
@@ -170,7 +183,7 @@
                 Label:
                     id: dni_sinbuscar
                     text: ""
-                TextInput:
+                Label:
                     id: dni_buscado
                     focus: True
                     multiline: False
@@ -178,33 +191,136 @@
                 Label:
                     id: mail_sinbuscar
                     text: ""
-                TextInput:
+                Label:
                     id: mail_buscado
                     focus: True
                     multiline: False
 
             RelativeLayout:
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Eliminar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
                     disabled: True if (buscardni.text == "") or (dni_buscado.text == "") else False
+                    background_color: (0.5, 0.5, 0.5, 1)
                     on_press:
                         app.root.EliminarEmpleado() if (app.root.BuscarEmpleado() == True) else app.root.open_pop2()
-                        app.root.reset_text(nombre_buscado,apellido_buscado,dni_buscado,mail_buscado)
+                        app.root.reset_text_buscar(nombre_buscado,apellido_buscado,dni_buscado,mail_buscado)
                 Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Volver"
+                    disabled: True
+                    on_press:
+                        app.root.transition.direction = 'right'
+                        app.root.current = "Principal"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+
+    Screen:
+        name: "Actualizar"
+        BoxLayout:
+            orientation: "vertical"
+            RelativeLayout:
+                Label:
+                    text: "Eliminar empleado"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            GridLayout:
+                rows: 1
+                cols: 2
+                padding: 10
+                spacing: 10
+                size_hint: (0.95, 0.35)
+                pos_hint: {"center_x": 0.5, "top": 0.9}
+                TextInput:
+                    id: buscardni_actualizar
+                    focus: True
+                    multiline: False
+                    hint_text: "Ingresar dni"
+                    hint_text_align: "center"
+                    valing: "middle"
+                    halign: "center"
+                    input_filter: "float"
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Buscar"
+                    on_press: 
+                        result = app.root.BuscarEmpleado()
+                        app.root.open_pop2() if result == False else None
+
+            GridLayout:
+                rows: 5
+                cols: 2
+                padding: -15
+                spacing: 5
+                size_hint: (0.80, 0.95)
+                pos_hint: {"center_x": 0.51, "top": 0.9}
+                Label:
+                    text: ""
+                Label:
+                    text: ""
+                
+                Label:
+                    id: nombre_sinbuscar_actualizar
+                    text: ""
+                TextInput:
+                    id: nombre_buscado_actualizar
+                    focus: True
+                    multiline: False
+                
+                Label:
+                    id: apellido_sinbuscar_actualizar
+                    text: ""
+                TextInput:
+                    id: apellido_buscado_actualizar
+                    focus: True
+                    multiline: False
+
+                Label:
+                    id: dni_sinbuscar_actualizar
+                    text: ""
+                TextInput:
+                    id: dni_buscado_actualizar
+                    focus: True
+                    multiline: False
+
+                Label:
+                    id: mail_sinbuscar_actualizar
+                    text: ""
+                TextInput:
+                    id: mail_buscado_actualizar
+                    focus: True
+                    multiline: False
+
+            RelativeLayout:
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Actualizar"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
+                    disabled: True if (buscardni_actualizar.text == "") or (dni_buscado_actualizar.text == "") else False
+                    on_press:
+                        app.root.EliminarEmpleado() if (app.root.BuscarEmpleado() == True) else app.root.open_pop2()
+                        app.root.reset_text_buscar(nombre_buscado_actualizar,apellido_buscado_actualizar,dni_buscado_actualizar,mail_buscado_actualizar)
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
                     on_press:
                         app.root.transition.direction = 'right'
                         app.root.current = "Principal"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+
 <MyPopup1>
     id: pop1
     size_hint:.7,.7
     auto_dismiss: False
     title: "Error"
     Button:
+        background_color: (0.5, 0.5, 0.5, 1)
         text: "El dni ya existe \n Ingresar otro nuevamente"
         halign: "center"
         on_press: pop1.dismiss()
@@ -216,6 +332,7 @@
     title: "Error"
 
     Button:
+        background_color: (0.5, 0.5, 0.5, 1)
         text: "dni incorrecto \n Ingrese otro nuevamente"
         halign: "center"
         on_press: pop2.dismiss()
@@ -233,12 +350,16 @@
         size_hint: (0.50, 0.50)
         pos_hint: {"center_x": 0.50, "center_y": 0.50}
         Button:
+            background_color: (0.5, 0.5, 0.5, 1)
             text: "Desea confirmar?"
             halign: "center"
-            on_press: 
-                app.root.AgregarEmpleado()
+            on_press:
+                state = True
+                app.root.AgregarEmpleado(state)
+                app.root.reset_text_agregar(app.root.ids.nombre_agregar,app.root.ids.apellido_agregar,app.root.ids.dni_agregar,app.root.ids.mail_agregar) if (state == True) else None
                 pop3.dismiss()
         Button:
+            background_color: (0.5, 0.5, 0.5, 1)
             text: "Cancelar"
             halign: "center"
             on_press:
