@@ -5,10 +5,10 @@ def error_vacios(self):
         return True
         
 def reset_text_buscar(self, nombre_buscado, apellido_buscado, dni_buscado, mail_buscado):
-    self.ids.nombre_buscado.text = ""
-    self.ids.apellido_buscado.text = ""
-    self.ids.dni_buscado.text = ""
-    self.ids.mail_buscado.text = ""
+    self.ids.nombre_buscado_eliminar.text = ""
+    self.ids.apellido_buscado_eliminar.text = ""
+    self.ids.dni_buscado_eliminar.text = ""
+    self.ids.mail_buscado_eliminar.text = ""
 
 def reset_text_agregar(self, nombre_agregar, apellido_agregar, dni_agregar, mail_agregar):
     self.ids.nombre_agregar.text = ""

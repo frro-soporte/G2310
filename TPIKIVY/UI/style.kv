@@ -137,7 +137,7 @@
                 size_hint: (0.95, 0.35)
                 pos_hint: {"center_x": 0.5, "top": 0.9}
                 TextInput:
-                    id: buscardni
+                    id: buscardni_eliminar
                     focus: True
                     multiline: False
                     hint_text: "Ingresar dni"
@@ -148,8 +148,9 @@
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Buscar"
-                    on_press: 
-                        result = app.root.BuscarEmpleado()
+                    on_press:
+                        state = "eliminar" 
+                        result = app.root.BuscarEmpleado(buscardni_eliminar.text, state)
                         app.root.open_pop2() if result == False else None
 
             GridLayout:
@@ -165,34 +166,34 @@
                     text: ""
                 
                 Label:
-                    id: nombre_sinbuscar
+                    id: nombre_sinbuscar_eliminar
                     text: ""
                 Label:
-                    id: nombre_buscado
+                    id: nombre_buscado_eliminar
                     focus: True
                     multiline: False
                 
                 Label:
-                    id: apellido_sinbuscar
+                    id: apellido_sinbuscar_eliminar
                     text: ""
                 Label:
-                    id: apellido_buscado
+                    id: apellido_buscado_eliminar
                     focus: True
                     multiline: False
 
                 Label:
-                    id: dni_sinbuscar
+                    id: dni_sinbuscar_eliminar
                     text: ""
                 Label:
-                    id: dni_buscado
+                    id: dni_buscado_eliminar
                     focus: True
                     multiline: False
 
                 Label:
-                    id: mail_sinbuscar
+                    id: mail_sinbuscar_eliminar
                     text: ""
                 Label:
-                    id: mail_buscado
+                    id: mail_buscado_eliminar
                     focus: True
                     multiline: False
 
@@ -202,15 +203,16 @@
                     text: "Eliminar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
-                    disabled: True if (buscardni.text == "") or (dni_buscado.text == "") else False
+                    disabled: True if (buscardni_eliminar.text == "") or (dni_buscado_eliminar.text == "") else False
                     background_color: (0.5, 0.5, 0.5, 1)
                     on_press:
-                        app.root.EliminarEmpleado() if (app.root.BuscarEmpleado() == True) else app.root.open_pop2()
-                        app.root.reset_text_buscar(nombre_buscado,apellido_buscado,dni_buscado,mail_buscado)
+                        #app.root.EliminarEmpleado(buscardni_eliminar.text)
+                        state = None
+                        app.root.EliminarEmpleado(buscardni_eliminar.text) if (app.root.BuscarEmpleado(buscardni_eliminar.text,state) == True) else app.root.open_pop2()
+                        app.root.reset_text_buscar(nombre_buscado_eliminar,apellido_buscado_eliminar,dni_buscado_eliminar,mail_buscado_eliminar)
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
-                    disabled: True
                     on_press:
                         app.root.transition.direction = 'right'
                         app.root.current = "Principal"
@@ -223,7 +225,7 @@
             orientation: "vertical"
             RelativeLayout:
                 Label:
-                    text: "Eliminar empleado"
+                    text: "Actualizar empleado"
                     font_size: '24sp'
                     size_hint: None, None
                     size: self.texture_size
@@ -247,8 +249,9 @@
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Buscar"
-                    on_press: 
-                        result = app.root.BuscarEmpleado()
+                    on_press:
+                        state = "actualizar"
+                        result = app.root.BuscarEmpleado(buscardni_actualizar.text, state)
                         app.root.open_pop2() if result == False else None
 
             GridLayout:
@@ -303,7 +306,8 @@
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
                     disabled: True if (buscardni_actualizar.text == "") or (dni_buscado_actualizar.text == "") else False
                     on_press:
-                        app.root.EliminarEmpleado() if (app.root.BuscarEmpleado() == True) else app.root.open_pop2()
+                        state = None
+                        app.root.ActualizarEmpleado(dni_buscado_actualizar.text) if (app.root.BuscarEmpleado(dni_buscado_actualizar.text, state) == True) else app.root.open_pop2()
                         app.root.reset_text_buscar(nombre_buscado_actualizar,apellido_buscado_actualizar,dni_buscado_actualizar,mail_buscado_actualizar)
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)

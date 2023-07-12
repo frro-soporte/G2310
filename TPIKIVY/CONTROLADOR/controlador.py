@@ -49,26 +49,38 @@ class UI(ScreenManager):
             pass
 
     #BUSCAR
-    def BuscarEmpleado(self):
-        dni = self.ids.buscardni.text
+    def BuscarEmpleado(self,dni,state):
         empleado = cl.search(self, dni)
         if empleado is not None:
-            self.ids.nombre_buscado.text = empleado[1]
-            self.ids.apellido_buscado.text = empleado[2]
-            self.ids.dni_buscado.text = str(empleado[3])
-            self.ids.mail_buscado.text = empleado[4]
-            self.ids.nombre_sinbuscar.text = "Nombre:"
-            self.ids.apellido_sinbuscar.text = "Apellido:"
-            self.ids.dni_sinbuscar.text = "DNI:"
-            self.ids.mail_sinbuscar.text = "Mail:"
+            if state == "eliminar":
+                self.ids.nombre_buscado_eliminar.text = empleado[1]
+                self.ids.apellido_buscado_eliminar.text = empleado[2]
+                self.ids.dni_buscado_eliminar.text = str(empleado[3])
+                self.ids.mail_buscado_eliminar.text = empleado[4]
+                self.ids.nombre_sinbuscar_eliminar.text = "Nombre:"
+                self.ids.apellido_sinbuscar_eliminar.text = "Apellido:"
+                self.ids.dni_sinbuscar_eliminar.text = "DNI:"
+                self.ids.mail_sinbuscar_eliminar.text = "Mail:"
+            elif state == "actualizar":
+                self.ids.nombre_buscado_actualizar.text = empleado[1]
+                self.ids.apellido_buscado_actualizar.text = empleado[2]
+                self.ids.dni_buscado_actualizar.text = str(empleado[3])
+                self.ids.mail_buscado_actualizar.text = empleado[4]
+                self.ids.nombre_sinbuscar_actualizar.text = "Nombre:"
+                self.ids.apellido_sinbuscar_actualizar.text = "Apellido:"
+                self.ids.dni_sinbuscar_actualizar.text = "DNI:"
+                self.ids.mail_sinbuscar_actualizar.text = "Mail:"
             return True
         else:
             return False
 
     #ELIMINAR
-    def EliminarEmpleado(self):
-        dni_eli= self.ids.buscardni.text
-        cl.delete(self, dni_eli)
+    def EliminarEmpleado(self, dni):
+        cl.delete(self, dni)
+
+    #ACTUALIZAR
+    def ActualizarEmpleado(self, dni):
+        cl.update(self, dni)
 
 #PRINCIPAL
 class MyApp(App):
