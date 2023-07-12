@@ -1,3 +1,4 @@
+#:import Factory kivy.factory.Factory
 <UI>
 	Screen:
         name: "Principal"
@@ -106,13 +107,14 @@
                     disabled: True if (nombre_agregar.text == "") or (apellido_agregar.text == "") or (dni_agregar.text == "") or (mail_agregar.text == "") else False
                     on_press:
                         state = False
-                        app.root.open_confirmar() if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
-                        app.root.reset_text_agregar(nombre_agregar,apellido_agregar,dni_agregar,mail_agregar) if (app.root.AgregarEmpleado(state) == False) else None
+                        tipo = "agregar"
+                        app.root.open_confirmar(tipo, None) if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
                     on_press:
-                        app.root.reset_text_agregar(nombre_agregar,apellido_agregar,dni_agregar,mail_agregar)
+                        tipo = "agregar"
+                        app.root.reset_text(tipo)
                         root.transition.direction = 'right'
                         root.current = "Principal"
                     size_hint: (0.3, 0.2)
@@ -151,7 +153,7 @@
                     on_press:
                         state = "eliminar" 
                         result = app.root.BuscarEmpleado(buscardni_eliminar.text, state)
-                        app.root.open_pop2() if result == False else None
+                        (app.root.open_pop2(), app.root.reset_text(state)) if result == False else app.root.disabled_eliminar()
 
             GridLayout:
                 rows: 5
@@ -199,21 +201,23 @@
 
             RelativeLayout:
                 Button:
+                    id: boton_eliminar 
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Eliminar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
-                    disabled: True if (buscardni_eliminar.text == "") or (dni_buscado_eliminar.text == "") else False
+                    disabled: True if (buscardni_eliminar.text == "") or (dni_buscado_eliminar.text == "") or (buscardni_eliminar.text != dni_buscado_eliminar.text) else False
                     background_color: (0.5, 0.5, 0.5, 1)
                     on_press:
-                        #app.root.EliminarEmpleado(buscardni_eliminar.text)
-                        state = None
-                        app.root.EliminarEmpleado(buscardni_eliminar.text) if (app.root.BuscarEmpleado(buscardni_eliminar.text,state) == True) else app.root.open_pop2()
-                        app.root.reset_text_buscar(nombre_buscado_eliminar,apellido_buscado_eliminar,dni_buscado_eliminar,mail_buscado_eliminar)
+                        state = False
+                        tipo = "eliminar"
+                        app.root.open_confirmar(tipo, buscardni_eliminar.text) if (app.root.BuscarEmpleado(buscardni_eliminar.text,tipo) == True) else app.root.open_pop2()
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
                     on_press:
+                        tipo = "eliminar"
+                        app.root.reset_text(tipo)
                         app.root.transition.direction = 'right'
                         app.root.current = "Principal"
                     size_hint: (0.3, 0.2)
@@ -252,7 +256,7 @@
                     on_press:
                         state = "actualizar"
                         result = app.root.BuscarEmpleado(buscardni_actualizar.text, state)
-                        app.root.open_pop2() if result == False else None
+                        (app.root.open_pop2(), app.root.reset_text(state)) if result == False else None
 
             GridLayout:
                 rows: 5
@@ -273,6 +277,8 @@
                     id: nombre_buscado_actualizar
                     focus: True
                     multiline: False
+                    disabled: True
+                    background_color: (0, 0, 0, 0)
                 
                 Label:
                     id: apellido_sinbuscar_actualizar
@@ -281,6 +287,8 @@
                     id: apellido_buscado_actualizar
                     focus: True
                     multiline: False
+                    background_color: (0, 0, 0, 0)
+                    disabled: True
 
                 Label:
                     id: dni_sinbuscar_actualizar
@@ -289,6 +297,8 @@
                     id: dni_buscado_actualizar
                     focus: True
                     multiline: False
+                    disabled: True
+                    background_color: (0, 0, 0, 0)
 
                 Label:
                     id: mail_sinbuscar_actualizar
@@ -297,6 +307,8 @@
                     id: mail_buscado_actualizar
                     focus: True
                     multiline: False
+                    background_color: (0, 0, 0, 0)
+                    disabled: True
 
             RelativeLayout:
                 Button:
@@ -304,15 +316,17 @@
                     text: "Actualizar"
                     size_hint: (0.3, 0.2)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
-                    disabled: True if (buscardni_actualizar.text == "") or (dni_buscado_actualizar.text == "") else False
+                    disabled: True if (buscardni_actualizar.text == "") or (dni_buscado_actualizar.text == "") or (buscardni_actualizar.text != dni_buscado_actualizar.text) else False
                     on_press:
-                        state = None
-                        app.root.ActualizarEmpleado(dni_buscado_actualizar.text) if (app.root.BuscarEmpleado(dni_buscado_actualizar.text, state) == True) else app.root.open_pop2()
-                        app.root.reset_text_buscar(nombre_buscado_actualizar,apellido_buscado_actualizar,dni_buscado_actualizar,mail_buscado_actualizar)
+                        tipo = "actualizar"
+                        #app.root.ActualizarEmpleado(dni_buscado_actualizar.text)
+                        app.root.open_confirmar(tipo, buscardni_actualizar.text) if (app.root.BuscarEmpleado(buscardni_actualizar.text,tipo) == True) else app.root.open_pop2()
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
                     on_press:
+                        tipo = "actualizar"
+                        app.root.reset_text(tipo)
                         app.root.transition.direction = 'right'
                         app.root.current = "Principal"
                     size_hint: (0.3, 0.2)
@@ -359,8 +373,10 @@
             halign: "center"
             on_press:
                 state = True
-                app.root.AgregarEmpleado(state)
-                app.root.reset_text_agregar(app.root.ids.nombre_agregar,app.root.ids.apellido_agregar,app.root.ids.dni_agregar,app.root.ids.mail_agregar) if (state == True) else None
+                app.root.AgregarEmpleado(state) if (root.tipo == "agregar") else None
+                app.root.EliminarEmpleado(root.dni, state) if (root.tipo == "eliminar") else None
+                app.root.ActualizarEmpleado(root.dni) if (root.tipo == "actualizar") else None
+                app.root.reset_text(root.tipo) if (state == True) else None
                 pop3.dismiss()
         Button:
             background_color: (0.5, 0.5, 0.5, 1)

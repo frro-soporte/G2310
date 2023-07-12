@@ -20,16 +20,14 @@ class UI(ScreenManager):
         po.open_pop1(self)
     def open_pop2(self):
         po.open_pop2(self)
-    def open_confirmar(self):
-        po.open_confirmar(self)
+    def open_confirmar(self, tipo, dni):
+        po.open_confirmar(self, tipo, dni)
 
     #LIMPIAR Y RESETS
     def error_vacios(self):
         return li.error_vacios(self)
-    def reset_text_buscar(self, nombre_buscado, apellido_buscado, dni_buscado, mail_buscado):
-        return li.reset_text_buscar(self, nombre_buscado, apellido_buscado, dni_buscado, mail_buscado)
-    def reset_text_agregar(self, nombre_agregar, apellido_agregar, dni_agregar, mail_agregar):
-        return li.reset_text_agregar(self, nombre_agregar, apellido_agregar, dni_agregar, mail_agregar)
+    def reset_text(self, state):
+        return li.reset_text(self, state)
 
     #VALIDACIONES
     def validardni(self):
@@ -62,6 +60,13 @@ class UI(ScreenManager):
                 self.ids.dni_sinbuscar_eliminar.text = "DNI:"
                 self.ids.mail_sinbuscar_eliminar.text = "Mail:"
             elif state == "actualizar":
+                self.ids.nombre_buscado_actualizar.disabled = True
+                self.ids.nombre_buscado_actualizar.background_color = (1,1,1,1)
+                self.ids.apellido_buscado_actualizar.disabled = False
+                self.ids.apellido_buscado_actualizar.background_color = (1,1,1,1)
+                self.ids.dni_buscado_actualizar.background_color = (1,1,1,1)
+                self.ids.mail_buscado_actualizar.disabled = False
+                self.ids.mail_buscado_actualizar.background_color = (1,1,1,1)
                 self.ids.nombre_buscado_actualizar.text = empleado[1]
                 self.ids.apellido_buscado_actualizar.text = empleado[2]
                 self.ids.dni_buscado_actualizar.text = str(empleado[3])
@@ -75,8 +80,14 @@ class UI(ScreenManager):
             return False
 
     #ELIMINAR
-    def EliminarEmpleado(self, dni):
-        cl.delete(self, dni)
+    def disabled_eliminar(self):
+            self.ids.boton_eliminar.disabled = False
+    def EliminarEmpleado(self, dni, state):
+        if state == True:
+            cl.delete(self, dni)
+        else:
+            pass
+            return False
 
     #ACTUALIZAR
     def ActualizarEmpleado(self, dni):
