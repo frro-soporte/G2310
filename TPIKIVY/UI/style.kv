@@ -106,7 +106,6 @@
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4 }
                     disabled: True if (nombre_agregar.text == "") or (apellido_agregar.text == "") or (dni_agregar.text == "") or (mail_agregar.text == "") else False
                     on_press:
-                        state = False
                         tipo = "agregar"
                         app.root.open_confirmar(tipo, None) if (app.root.error_vacios() == True) and (app.root.validardni() == True) else app.root.open_pop1()
                 Button:
@@ -209,7 +208,6 @@
                     disabled: True if (buscardni_eliminar.text == "") or (dni_buscado_eliminar.text == "") or (buscardni_eliminar.text != dni_buscado_eliminar.text) else False
                     background_color: (0.5, 0.5, 0.5, 1)
                     on_press:
-                        state = False
                         tipo = "eliminar"
                         app.root.open_confirmar(tipo, buscardni_eliminar.text) if (app.root.BuscarEmpleado(buscardni_eliminar.text,tipo) == True) else app.root.open_pop2()
                 Button:
@@ -319,8 +317,8 @@
                     disabled: True if (buscardni_actualizar.text == "") or (dni_buscado_actualizar.text == "") or (buscardni_actualizar.text != dni_buscado_actualizar.text) else False
                     on_press:
                         tipo = "actualizar"
-                        #app.root.ActualizarEmpleado(dni_buscado_actualizar.text)
-                        app.root.open_confirmar(tipo, buscardni_actualizar.text) if (app.root.BuscarEmpleado(buscardni_actualizar.text,tipo) == True) else app.root.open_pop2()
+                        app.root.ActualizarEmpleado(dni_buscado_actualizar.text)
+                        #app.root.open_confirmar(tipo, buscardni_actualizar.text) if (app.root.BuscarEmpleado(buscardni_actualizar.text,tipo) == True) else app.root.open_pop2()
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
