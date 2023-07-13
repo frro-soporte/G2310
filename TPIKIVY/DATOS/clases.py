@@ -63,8 +63,4 @@ def update(self, dni):
     c.execute("UPDATE Empleado SET nombre = ?, apellido = ?, mail = ? WHERE dni = ?", (self.ids.nombre_buscado_actualizar.text, self.ids.apellido_buscado_actualizar.text, self.ids.mail_buscado_actualizar.text, dni, ))
     bd.comit_cerrar_conexion(conn)
 
-
-
-
-
-        
+       
