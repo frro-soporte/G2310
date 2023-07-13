@@ -103,10 +103,6 @@ class UI(ScreenManager):
     #ACTUALIZAR
     def ActualizarEmpleado(self, dni):
         cl.update(self, dni)
-
-    #MOSTRAR DATOS
-    #def MostrarEmpleado(self,dni):
-        #lista= cl.read(self,dni)
         
 #PRINCIPAL
 class MyApp(App):
