@@ -75,6 +75,15 @@ class UI(ScreenManager):
                 self.ids.apellido_sinbuscar_actualizar.text = "Apellido:"
                 self.ids.dni_sinbuscar_actualizar.text = "DNI:"
                 self.ids.mail_sinbuscar_actualizar.text = "Mail:"
+            elif state == "mostrar":
+                self.ids.nombre_buscado_mostrar.text = empleado[1]
+                self.ids.apellido_buscado_mostrar.text = empleado[2]
+                self.ids.dni_buscado_mostrar.text = str(empleado[3])
+                self.ids.mail_buscado_mostrar.text = empleado[4]
+                self.ids.nombre_sinbuscar_mostrar.text = "Nombre:"
+                self.ids.apellido_sinbuscar_mostrar.text = "Apellido:"
+                self.ids.dni_sinbuscar_mostrar.text = "DNI:"
+                self.ids.mail_sinbuscar_mostrar.text = "Mail:"
             return True
         else:
             return False
@@ -93,6 +102,10 @@ class UI(ScreenManager):
     def ActualizarEmpleado(self, dni):
         cl.update(self, dni)
 
+    #MOSTRAR DATOS
+    #def MostrarEmpleado(self,dni):
+        #lista= cl.read(self,dni)
+        
 #PRINCIPAL
 class MyApp(App):
     def build(self):
