@@ -60,7 +60,7 @@ class UI(ScreenManager):
                 self.ids.dni_sinbuscar_eliminar.text = "DNI:"
                 self.ids.mail_sinbuscar_eliminar.text = "Mail:"
             elif state == "actualizar":
-                self.ids.nombre_buscado_actualizar.disabled = True
+                self.ids.nombre_buscado_actualizar.disabled = False
                 self.ids.nombre_buscado_actualizar.background_color = (1,1,1,1)
                 self.ids.apellido_buscado_actualizar.disabled = False
                 self.ids.apellido_buscado_actualizar.background_color = (1,1,1,1)
@@ -76,10 +76,12 @@ class UI(ScreenManager):
                 self.ids.dni_sinbuscar_actualizar.text = "DNI:"
                 self.ids.mail_sinbuscar_actualizar.text = "Mail:"
             elif state == "mostrar":
+                self.ids.id_buscado_mostrar.text = str(empleado[0])
                 self.ids.nombre_buscado_mostrar.text = empleado[1]
                 self.ids.apellido_buscado_mostrar.text = empleado[2]
                 self.ids.dni_buscado_mostrar.text = str(empleado[3])
                 self.ids.mail_buscado_mostrar.text = empleado[4]
+                self.ids.id_sinbuscar_mostrar.text = "id:"
                 self.ids.nombre_sinbuscar_mostrar.text = "Nombre:"
                 self.ids.apellido_sinbuscar_mostrar.text = "Apellido:"
                 self.ids.dni_sinbuscar_mostrar.text = "DNI:"

@@ -322,6 +322,7 @@
                         tipo = "actualizar"
                         app.root.ActualizarEmpleado(dni_buscado_actualizar.text)
                         #app.root.open_confirmar(tipo, buscardni_actualizar.text) if (app.root.BuscarEmpleado(buscardni_actualizar.text,tipo) == True) else app.root.open_pop2()
+                        app.root.reset_text(tipo)
                 Button:
                     background_color: (0.5, 0.5, 0.5, 1)
                     text: "Volver"
@@ -339,7 +340,7 @@
 			orientation: "vertical"
 			RelativeLayout:
                 Label:
-                    text: "Mostrar Datos de empleado"
+                    text: "Mostrar Datos"
                     font_size: '24sp'
                     size_hint: None, None
                     size: self.texture_size
@@ -369,7 +370,7 @@
                         (app.root.open_pop2(), app.root.reset_text(state)) if result == False else None
 
             GridLayout:
-                rows: 5
+                rows: 6
                 cols: 2
                 padding: -15
                 spacing: 5
@@ -379,6 +380,14 @@
                     text: ""
                 Label:
                     text: ""
+                
+                Label:
+                    id: id_sinbuscar_mostrar
+                    text: ""
+                Label:
+                    id: id_buscado_mostrar
+                    focus: True
+                    multiline: False
                 
                 Label:
                     id: nombre_sinbuscar_mostrar

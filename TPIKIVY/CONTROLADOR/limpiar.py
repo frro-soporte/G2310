@@ -38,6 +38,8 @@ def reset_text(self, state):
         self.ids.dni_buscado_actualizar.text = ""
         self.ids.mail_buscado_actualizar.text = ""
     elif state == "mostrar":
+        self.ids.id_buscado_mostrar.text = ""
+        self.ids.id_sinbuscar_mostrar.text = ""
         self.ids.buscardni_mostrar.text = ""
         self.ids.nombre_sinbuscar_mostrar.text = ""
         self.ids.apellido_sinbuscar_mostrar.text = ""
