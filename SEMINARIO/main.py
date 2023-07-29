@@ -89,7 +89,7 @@ def transformacion(df):
 
 def combinaciones(df):
     ######Concatenacion con ventas en Sudamerica
-    indices = [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009]
+    indices = [10010, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009]
     dfconc = leer_excel("concatenacion")
     dfconc.index = indices
     df = pd.concat([df,dfconc])
@@ -135,6 +135,6 @@ df = leer_excel("ventas")
 #df = faltantes(df)
 #df = operaciones(df)
 #df = transformacion(df)
-#df = combinaciones(df)
-#MostrarDatos(df)
+df = combinaciones(df)
+MostrarDatos(df)
 #MostrarGrafico(df)
