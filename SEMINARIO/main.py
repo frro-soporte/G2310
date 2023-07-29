@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 pd.set_option('display.float_format', '{:.2f}'.format)
 
 def leer_excel(archivo):
-    ruta_archivo = "D:\\Usuarios\\Martin\\Escritorio\\Soporte\\ventas.xlsx"
+    ruta_archivo = "D:\\Soporte\\practicos\\G2310\\SEMINARIO\\ventas.xlsx"
     if archivo == "ventas":
         df = pd.read_excel(ruta_archivo, sheet_name="ventas")
     elif archivo == "concatenacion":
@@ -20,9 +20,9 @@ def leer_excel(archivo):
     return df
 
 def MostrarDatos(df):
-    with open("output.txt", "w") as f:
+    with open("D:\\Soporte\\practicos\\G2310\\SEMINARIO\\output.txt", "w") as f:
         f.write(df.to_string())
-    os.system("output.txt")
+    os.system("D:\\Soporte\\practicos\\G2310\\SEMINARIO\\output.txt")
     
 def series():
     #####CREAR SERIE A PARTIR DE UNA LISTA Y INGRESANDO LOS INDICES COMO PARAMETROS

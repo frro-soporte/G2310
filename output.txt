@@ -1,5 +1,0 @@
-  Prioridad  CantidadPrioridad
-0      Alta                247
-1      Baja                261
-2   Crítica                249
-3     Media                243
