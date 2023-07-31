@@ -41,26 +41,26 @@ def dataframes():
 
 def filtrado_seleccion(df):
     #####Consultar la columna FechaPedido
-    df = df["FechaPedido"]
+    #df = df["FechaPedido"]
     #####Seleccionar la primera fila
     #df = df.loc[0]
     #####Consultar los pedidos en el año 2020
-    #df = df[df["FechaPedido"].dt.year == 2020]
+    df = df[df["FechaPedido"].dt.year == 2020]
     return df
 
 def faltantes(df):
     #####Comprobar columna Null
-    df= df.isnull()
+    #df = df.isnull()
     #####Descartar valores nulos
     #df = df.dropna(axis=1)
     #####Rellenar celdas vacias con un valor
-    #df = df.fillna(value="-")
+    df = df.fillna(value="-")
     return df
 
 def operaciones(df):
     columna_interes = ["PrecioUnitario", "CostoUnitario", "ImporteVentaTotal", "ImporteCostoTotal"]
     #####Agrupar por zona mostrando las analiticas descriptivas de las columnas de interes
-    df = df.groupby("Zona")[columna_interes].describe().transpose()
+    #df = df.groupby("Zona")[columna_interes].describe().transpose()
     #####Consultar cual fue la venta mas chica en unidades
     #df = df.loc[df["Unidades"].idxmin()]
     #####Consultar cual fue la venta mas grande en unidades
@@ -69,7 +69,7 @@ def operaciones(df):
 
 def transformacion(df):
     #####Consultar las primeras 5 filas
-    df = df.head()
+    #df = df.head()
     #####Consultar las ultimas 5 filas
     #df = df.tail()
     #####Consultar las datos unicos
@@ -81,7 +81,7 @@ def transformacion(df):
     #df = df.sort_values(by="Unidades",ascending=True)
     ######Ordenar por fecha reciente
     #df = df.sort_values(by="FechaPedido",ascending=False)
-    ######Agregar una columna "Ganancia" que es la diferencia de "ImporteCostoTotal" * "ImporteVentaTotal"
+    ######Agregar una columna "Ganancia" que es la diferencia de "ImporteCostoTotal" - "ImporteVentaTotal"
     #df["Ganancia"] = df["ImporteVentaTotal"] - df["ImporteCostoTotal"]
     ######Borrar la columna "Null"
     #df = df.drop("Null",axis=1)
@@ -89,16 +89,16 @@ def transformacion(df):
 
 def combinaciones(df):
     ######Concatenacion con ventas en Sudamerica
-    indices = [10010, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009]
-    dfconc = leer_excel("concatenacion")
-    dfconc.index = indices
-    df = pd.concat([df,dfconc])
+    #indices = [10010, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009]
+    #dfconc = leer_excel("concatenacion")
+    #dfconc.index = indices
+    #df = pd.concat([df,dfconc])
     ######Fusionar con la columna IDPedido para consultar si se termino de cobrar o sigue cobrando cuotas
     #dffus = leer_excel("fusion")
     #df = pd.merge(df, dffus, on="IDPedido")
     ######Union mediante indices para conocer el personal que estuvo a cargo del pedido
-    #dfun = leer_excel("union")
-    #df = df.join(dfun)
+    dfun = leer_excel("union")
+    df = df.join(dfun)
     return df
 
 def MostrarGrafico(df):
@@ -137,4 +137,4 @@ df = leer_excel("ventas")
 #df = transformacion(df)
 df = combinaciones(df)
 MostrarDatos(df)
-#MostrarGrafico(df)
+MostrarGrafico(df)
