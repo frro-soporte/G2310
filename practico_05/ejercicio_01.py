@@ -26,7 +26,7 @@ class Socio(Base):
 Session = sessionmaker(engine)
 session = Session()
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     Base.metadata.create_all(engine)
-    session.close()
+    session.close()"""
 
