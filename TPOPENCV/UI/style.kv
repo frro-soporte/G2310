@@ -1,0 +1,79 @@
+#:import Factory kivy.factory.Factory
+<UI>
+	Screen:
+        name: "Principal"
+        BoxLayout:
+            orientation: 'vertical'
+            RelativeLayout:
+                Label:
+                    text: "BIENVENIDOS"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            GridLayout
+                rows: 2
+                cols: 1
+                padding: 10
+                spacing: 10
+
+                Button:
+                    text: "Iniciar Sesion"
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    on_press:
+                        root.transition.direction = "right"
+                        root.current = "Iniciar" 
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Registrarse"
+                    on_press:
+                        root.transition.direction = "right"
+                        root.current = "Registrar" 
+            RelativeLayout:
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Salir"
+                    on_release: app.stop()
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+    Screen:
+        name: "Iniciar"
+        BoxLayout:
+            orientation: 'vertical'
+            RelativeLayout:
+                Label:
+                    text: "INICIAR SESION"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            RelativeLayout:
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Volver"
+                    on_press:
+                        root.transition.direction = 'right'
+                        root.current = "Principal"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+
+    Screen:
+        name: "Registrar"
+        BoxLayout:
+            orientation: 'vertical'
+            RelativeLayout:
+                Label:
+                    text: "REGISTRARSE"
+                    font_size: '24sp'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.8}
+            RelativeLayout:
+                Button:
+                    background_color: (0.5, 0.5, 0.5, 1)
+                    text: "Volver"
+                    on_press:
+                        root.transition.direction = 'right'
+                        root.current = "Principal"
+                    size_hint: (0.3, 0.2)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
