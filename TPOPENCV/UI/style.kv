@@ -38,24 +38,58 @@
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
     Screen:
         name: "Iniciar"
-        BoxLayout:
-            orientation: 'vertical'
-            RelativeLayout:
-                Label:
-                    text: "INICIAR SESION"
-                    font_size: '24sp'
-                    size_hint: None, None
-                    size: self.texture_size
-                    pos_hint: {'center_x': 0.5, 'top': 0.8}
-            RelativeLayout:
-                Button:
-                    background_color: (0.5, 0.5, 0.5, 1)
-                    text: "Volver"
-                    on_press:
-                        root.transition.direction = 'right'
-                        root.current = "Principal"
-                    size_hint: (0.3, 0.2)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
+        on_enter: root.start_capture()
+        RelativeLayout:
+            Label:
+                text: "INICIAR SESION"
+                font_size: '24sp'
+                size_hint: None, None
+                size: self.texture_size
+                pos_hint: {'center_x': 0.5, 'top': 0.98}
+        GridLayout:
+            rows: 2
+            cols: 2
+            padding: 10
+            spacing: 10
+            size_hint: (0.95, 0.18)
+            pos_hint: {"center_x": 0.5, "top": 0.9}
+            Label:
+                text: "Usuario"
+            TextInput:
+                id: usuario_iniciar
+                focus: True
+                multiline: False
+                hint_text: "Ingresar Usuario"
+                input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+                
+            Label:
+                text: "Contraseña"
+            TextInput:
+                id: pass_iniciar
+                focus: True
+                multiline: False
+                hint_text: "Ingresar Contraseña"
+                input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+        RelativeLayout:
+            Image:
+                id: camera_image
+                size_hint: (0.7, 0.4)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        RelativeLayout:
+            Button:
+                text: "Detener camara"
+                background_color: (0.5, 0.5, 0.5, 1)
+                on_press: app.root.stop_capture()
+                size_hint: (0.5, 0.05)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.16 }
+            Button:
+                background_color: (0.5, 0.5, 0.5, 1)
+                text: "Volver"
+                on_press:
+                    root.transition.direction = 'right'
+                    root.current = "Principal"
+                size_hint: (0.5, 0.05)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
 
     Screen:
         name: "Registrar"
