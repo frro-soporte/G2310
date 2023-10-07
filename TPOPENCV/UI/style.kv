@@ -1,41 +1,5 @@
 #:import Factory kivy.factory.Factory
 <UI>
-	Screen:
-        name: "Principal"
-        BoxLayout:
-            orientation: 'vertical'
-            RelativeLayout:
-                Label:
-                    text: "BIENVENIDOS"
-                    font_size: '24sp'
-                    size_hint: None, None
-                    size: self.texture_size
-                    pos_hint: {'center_x': 0.5, 'top': 0.8}
-            GridLayout
-                rows: 2
-                cols: 1
-                padding: 10
-                spacing: 10
-
-                Button:
-                    text: "Iniciar Sesion"
-                    background_color: (0.5, 0.5, 0.5, 1)
-                    on_press:
-                        root.transition.direction = "right"
-                        root.current = "Iniciar" 
-                Button:
-                    background_color: (0.5, 0.5, 0.5, 1)
-                    text: "Registrarse"
-                    on_press:
-                        root.transition.direction = "right"
-                        root.current = "Registrar" 
-            RelativeLayout:
-                Button:
-                    background_color: (0.5, 0.5, 0.5, 1)
-                    text: "Salir"
-                    on_release: app.stop()
-                    size_hint: (0.3, 0.2)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
     Screen:
         name: "Iniciar"
         RelativeLayout:
@@ -77,36 +41,81 @@
             pos_hint: {'center_x': 0.5, 'center_y': 0.56 }
 
         Button:
+            text: "Todavia no tenes cuenta? Registrarse"
+            size_hint: (0.80, 0.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50 }
+            on_press:
+                root.transition.direction = 'right'
+                root.current = "Registrar"
+            
+        Button:
+            text: "Reconocimiento facial"
+            background_color: (0.5, 0.5, 0.5, 1)
+            on_press:
+                root.transition.direction = 'right'
+                root.current = "Reconocimiento"
+            size_hint: (0.60, 0.10)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.08 }
+
+    Screen:
+        name: "Registrar"
+        on_enter: root.start_capture()
+        RelativeLayout:
+            Label:
+                text: "REGISTRARSE"
+                font_size: '24sp'
+                size_hint: None, None
+                size: self.texture_size
+                pos_hint: {'center_x': 0.5, 'top': 0.97}
+
+        Label:
+            text: "Usuario"
+            pos_hint: {'center_x': 0.1, 'center_y': 0.85}
+        TextInput:
+            id: usuario_registrar
+            focus: True
+            multiline: False
+            #hint_text: "Ingresar Usuario"
+            pos_hint: {'center_x': 0.5, 'top': 0.83}
+            size_hint: (0.95, 0.070)
+            input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+                
+        Label:
+            text: "Contraseña"
+            pos_hint: {'center_x': 0.13, 'center_y': 0.72}
+        TextInput:
+            id: pass_registrar
+            focus: True
+            multiline: False
+            pos_hint: {'center_x': 0.5, 'top': 0.70}
+            size_hint: (0.95, 0.070)
+            #hint_text: "Ingresar Contraseña"
+            input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+
+        Image:
+            id: registrar_image
+            size_hint: (0.8, 0.4)
+            pos_hint: {"center_x": 0.5, "center_y": 0.4}
+
+        Button:
+            text: "Registrar rostro"
+            background_color: (0.5, 0.5, 0.5, 1)
+            on_press: app.root.stop_capture()
+            size_hint: (0.6, 0.07)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.14 }
+
+        Button:
             background_color: (0.5, 0.5, 0.5, 1)
             text: "Volver"
             on_press:
                 root.transition.direction = 'right'
-                root.current = "Principal"
-            size_hint: (0.60, 0.15)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
+                root.current = "Iniciar"
+            size_hint: (0.6, 0.07)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.06 }
 
     Screen:
-        name: "Registrar"
-        BoxLayout:
-            orientation: 'vertical'
-            RelativeLayout:
-                Label:
-                    text: "REGISTRARSE"
-                    font_size: '24sp'
-                    size_hint: None, None
-                    size: self.texture_size
-                    pos_hint: {'center_x': 0.5, 'top': 0.8}
-            RelativeLayout:
-                Button:
-                    background_color: (0.5, 0.5, 0.5, 1)
-                    text: "Volver"
-                    on_press:
-                        root.transition.direction = 'right'
-                        root.current = "Principal"
-                    size_hint: (0.3, 0.2)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.2 }
-    Screen:
-        name: "Principal"
+        name: "Reconocimiento"
+        on_enter: root.start_capture()
         BoxLayout:
             orientation: 'vertical'
             RelativeLayout:
@@ -144,37 +153,7 @@
     Screen:
         name: "Iniciar_2"
         on_enter: root.start_capture()
-        RelativeLayout:
-            Label:
-                text: "INICIAR SESION"
-                font_size: '24sp'
-                size_hint: None, None
-                size: self.texture_size
-                pos_hint: {'center_x': 0.5, 'top': 0.98}
-        GridLayout:
-            rows: 2
-            cols: 2
-            padding: 10
-            spacing: 10
-            size_hint: (0.95, 0.18)
-            pos_hint: {"center_x": 0.5, "top": 0.9}
-            Label:
-                text: "Usuario"
-            TextInput:
-                id: usuario_iniciar
-                focus: True
-                multiline: False
-                hint_text: "Ingresar Usuario"
-                input_filter: lambda text, from_undo: '' if not text.isalpha() else text
-                
-            Label:
-                text: "Contraseña"
-            TextInput:
-                id: pass_iniciar
-                focus: True
-                multiline: False
-                hint_text: "Ingresar Contraseña"
-                input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+    
         RelativeLayout:
             Image:
                 id: camera_image
@@ -185,7 +164,7 @@
                 text: "Detener camara"
                 background_color: (0.5, 0.5, 0.5, 1)
                 on_press: app.root.stop_capture()
-                size_hint: (0.5, 0.05)
+                size_hint: (0.6, 0.05)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.16 }
             Button:
                 background_color: (0.5, 0.5, 0.5, 1)
@@ -193,5 +172,5 @@
                 on_press:
                     root.transition.direction = 'right'
                     root.current = "Principal"
-                size_hint: (0.5, 0.05)
+                size_hint: (0.6, 0.05)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.1 }

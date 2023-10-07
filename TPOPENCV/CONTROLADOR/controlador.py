@@ -30,7 +30,7 @@ class UI(ScreenManager):
             buf = buf1.tostring()
             texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
             texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
-            self.ids.camera_image.texture = texture
+            self.ids.registrar_image.texture = texture
 #PRINCIPAL
 class MyApp(App):
     def build(self):
