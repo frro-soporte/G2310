@@ -8,6 +8,7 @@ from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 import sqlite3
 import cv2
+from CONTROLADOR import CapaEntrada
 
 #VALIDACIONES
 #ef validar_tabla():
@@ -26,11 +27,15 @@ class UI(ScreenManager):
     def update(self, dt):
         ret, frame = self.capture.read()
         if ret:
+            user=self.ids.usuario_registrar.text
+            CapaEntrada.CapturarRostro(self.capture,frame,user)
             buf1 = cv2.flip(frame, 0)
             buf = buf1.tostring()
             texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
             texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
             self.ids.registrar_image.texture = texture
+            
+            
 #PRINCIPAL
 class MyApp(App):
     def build(self):
