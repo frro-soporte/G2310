@@ -59,7 +59,72 @@
 
     Screen:
         name: "Registrar"
-        on_enter: root.start_capture()
+        #on_enter: root.start_capture()
+        RelativeLayout:
+            Label:
+                text: "REGISTRARSE"
+                font_size: '24sp'
+                size_hint: None, None
+                size: self.texture_size
+                pos_hint: {'center_x': 0.5, 'top': 0.97}
+
+        Label:
+            text: "Usuario"
+            pos_hint: {'center_x': 0.1, 'center_y': 0.86}
+        TextInput:
+            id: usuario_registrar
+            focus: True
+            multiline: False
+            #hint_text: "Ingresar Usuario"
+            pos_hint: {'center_x': 0.5, 'top': 0.84}
+            size_hint: (0.95, 0.067)
+            input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+                
+        Label:
+            text: "Contraseña"
+            pos_hint: {'center_x': 0.13, 'center_y': 0.73}
+        TextInput:
+            id: pass_registrar
+            focus: True
+            multiline: False
+            pos_hint: {'center_x': 0.5, 'top': 0.71}
+            size_hint: (0.95, 0.067)
+            #hint_text: "Ingresar Contraseña"
+            input_filter: lambda text, from_undo: '' if not text.isalpha() else text
+
+        Button:
+            text: "Capturar rostro"
+            background_color: (0.5, 0.5, 0.5, 1)
+            on_press:
+                app.root.capturar()
+            size_hint: (0.6, 0.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.60 }
+
+        #Image:
+        #    id: registrar_image
+        #    size_hint: (0.65, 0.35)
+        #    pos_hint: {"center_x": 0.5, "center_y": 0.39}
+
+        Button:
+            text: "Registrar usuario"
+            background_color: (0.5, 0.5, 0.5, 1)
+            on_press:
+                app.root.open_confirmar()
+            size_hint: (0.6, 0.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.10 }
+
+        Button:
+            background_color: (0.5, 0.5, 0.5, 1)
+            text: "Volver"
+            on_press:
+                root.transition.direction = 'right'
+                root.current = "Iniciar"
+            size_hint: (0.6, 0.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.04 }
+
+    Screen:
+        name: "Registrar_facial"
+        #on_enter: root.start_capture()
         RelativeLayout:
             Label:
                 text: "REGISTRARSE"
@@ -72,19 +137,17 @@
             text: "Usuario"
             pos_hint: {'center_x': 0.1, 'center_y': 0.85}
         TextInput:
-            id: usuario_registrar
-            focus: True
+            id: usuario_registrar_facial
+            #disabled = True
             multiline: False
-            #hint_text: "Ingresar Usuario"
             pos_hint: {'center_x': 0.5, 'top': 0.83}
             size_hint: (0.95, 0.070)
-            input_filter: lambda text, from_undo: '' if not text.isalpha() else text
                 
         Label:
             text: "Contraseña"
             pos_hint: {'center_x': 0.13, 'center_y': 0.72}
         TextInput:
-            id: pass_registrar
+            id: pass_registrar_facial
             focus: True
             multiline: False
             pos_hint: {'center_x': 0.5, 'top': 0.70}
@@ -92,15 +155,18 @@
             #hint_text: "Ingresar Contraseña"
             input_filter: lambda text, from_undo: '' if not text.isalpha() else text
 
-        Image:
-            id: registrar_image
-            size_hint: (0.8, 0.4)
-            pos_hint: {"center_x": 0.5, "center_y": 0.4}
+        #Image:
+        #    id: registrar_image
+        #    size_hint: (0.8, 0.4)
+        #    pos_hint: {"center_x": 0.5, "center_y": 0.4}
 
         Button:
-            text: "Registrar rostro"
+            text: "Siguiente"
             background_color: (0.5, 0.5, 0.5, 1)
-            on_press: app.root.stop_capture()
+            on_press:
+                root.transition.direction = "right"
+                root.current = "Registrar_facial" 
+                #app.root.open_confirmar()
             size_hint: (0.6, 0.07)
             pos_hint: {'center_x': 0.5, 'center_y': 0.14 }
 
@@ -174,3 +240,44 @@
                     root.current = "Principal"
                 size_hint: (0.6, 0.05)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.1 }
+
+
+<MyPopup1>
+    id: pop1
+    size_hint:.7,.7
+    auto_dismiss: False
+    title: "Registrar Reconocimiento Facial"
+    Button:
+        background_color: (0.5, 0.5, 0.5, 1)
+        text: "Se requiere registrar datos biometricos \n Ingresar"
+        halign: "center"
+        on_press:
+            root.transition.direction = 'right'
+            root.current = "Iniciar" 
+            pop1.dismiss()
+
+<Confirmar>
+    id: pop3
+    size_hint:.7,.7
+    auto_dismiss: False
+    title: "Desea confirmar?"
+    GridLayout:
+        rows: 2
+        cols: 1
+        padding: 10
+        spacing: 10
+        size_hint: (0.50, 0.50)
+        pos_hint: {"center_x": 0.50, "center_y": 0.50}
+        Button:
+            background_color: (0.5, 0.5, 0.5, 1)
+            text: "Aceptar"
+            halign: "center"
+            on_press:
+                app.root.AgregarPersona()
+                pop3.dismiss()
+        Button:
+            background_color: (0.5, 0.5, 0.5, 1)
+            text: "Cancelar"
+            halign: "center"
+            on_press:
+                pop3.dismiss()
