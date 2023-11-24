@@ -7,9 +7,9 @@ from kivy.core.window import Window
 from kivy.uix.image import Image
 from kivy.uix.videoplayer import VideoPlayer
 from kivy.uix.filechooser import FileChooserListView
-from deteccionMano import CameraScreen
-from PantallalogGr import LoginScreen
-from PantallaLog import LoginScreen2
+from deteccion import CameraScreen
+from screen2 import LoginScreen
+from screen1 import LoginScreen2
 
 class IndexScreen(Screen):
         def __init__(self, **kwargs):
