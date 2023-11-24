@@ -23,27 +23,27 @@ class LoginScreen2(Screen):
         #layout = BoxLayout(orientation='vertical')
 
         # Agregar un Label inicial arriba de la cámara
-        self.add_widget(Label(text="Iniciar Sesion o Registrarse", size_hint_y=None, pos_hint= {'center_x': 0.5, 'top': 0.98}, height=30))
+        self.label = Label(text="Iniciar Sesion o Registrarse", size_hint_y=None, pos_hint= {'center_x': 0.5, 'top': 0.98}, height=30)
         #self.label = Label(text="Iniciar Sesion o Registrarse", size_hint_y=None, height=30)
-        #layout.add_widget(self.label)
+        self.add_widget(self.label)
         
         # Config. para la camara en kivy
         self.capture = cv2.VideoCapture(0)
-        self.image = Image(size_hint= (0.70, 0.70), pos_hint= {"center_x": 0.5, "center_y": 0.5})
+        self.image = Image(size_hint= (0.70, 0.70), pos_hint= {"center_x": 0.5, "center_y": 0.55})
         #layout.add_widget(self.image)
         self.add_widget(self.image)
 
         #buttonsLayout = BoxLayout(orientation='horizontal', spacing=10, size_hint= (None, None), height=50, padding = 10, pos_hint = {'center_x': 0.40})
 
-        self.add_widget(Button(text="Ingresar", size_hint= (0.60, 0.05), pos_hint= {'center_x': 0.5, 'center_y': 0.56 }, on_press=self.capture_validate_image)) 
-        #login_button = Button(text="Iniciar", size_hint=(None, None), size=(100, 50))
-        #login_button.bind(on_press=self.capture_validate_image)
-        #buttonsLayout.add_widget(login_button)
+        #self.add_widget(Button(text="Ingresar", size_hint= (0.15, 0.05), pos_hint= {'center_x': 0.5, 'center_y': 0.12 }).bind(on_press=self.capture_validate_image)) 
+        login_button = Button(text="Ingresar", size_hint=(0.15, 0.05), pos_hint= {'center_x': 0.5, 'center_y': 0.12 })
+        login_button.bind(on_press=self.capture_validate_image)
+        self.add_widget(login_button)
 
-        self.add_widget(Button(text="Todavia no tenes cuenta? Registrarse", size_hint= (0.80, 0.05), pos_hint= {'center_x': 0.5, 'center_y': 0.1 }, on_press=self.create_user))
-        #login_button = Button(text="Registrarse", size_hint=(None, None), size=(100, 50))
-        #login_button.bind(on_press=self.create_user)
-        #buttonsLayout.add_widget(login_button)
+        #self.add_widget(Button(text="Todavia no tenes cuenta? Registrarse", size_hint= (0.40, 0.05), pos_hint= {'center_x': 0.5, 'center_y': 0.060}).bind(on_press=self.create_user))
+        login_button = Button(text="Todavia no tenes cuenta? Registrarse", size_hint=(0.35, 0.05), pos_hint= {'center_x': 0.5, 'center_y': 0.060})
+        login_button.bind(on_press=self.create_user)
+        self.add_widget(login_button)
 
         #layout.add_widget(buttonsLayout)
         #self.add_widget(buttonsLayout)
@@ -76,9 +76,7 @@ class LoginScreen2(Screen):
     
     # Funcion para sacar la foto y validarla
     def capture_validate_image(self, instance):
-
-        self.label.text = "Validando identidad..."
-
+        self.label.text = "Validando"
         # Captura una imagen y guarda en un archivo
         ret, frame = self.capture.read()
         if ret:
@@ -89,7 +87,7 @@ class LoginScreen2(Screen):
             # Valida la identidad de la cara en la foto
             self.log_in = validar_identidad()
             if not self.log_in:
-                self.label.text = f"Usuario no encontrado."
+                self.label.text = "Usuario no encontrado."
 
         except Exception as e:
             print(e)
@@ -109,8 +107,7 @@ class LoginScreen2(Screen):
         if ret:
             #cv2.imwrite("TPOPENCV_2/Faces/"+date_time_str+".jpg", frame)
             cv2.imwrite("TPOPENCV_2/Faces/"+date_time_str+".jpg", frame)
-            self.label.text = f"Usuario creado con exito."
-            print("Usuario Creado.")
+            self.label.text = "Usuario creado"
 
 
     # Cambia de pagina al IndexPage
